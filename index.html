@@ -1,0 +1,746 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://sitename.example/">
+      
+      
+      
+        <link rel="next" href="workflow_alpha/">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>The GOMA pipeline</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:300,300i,400,400i,700,700i%7CRed+Hat+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Merriweather Sans";--md-code-font:"Red Hat Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#running-the-goma-pipeline" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="The GOMA pipeline" class="md-header__button md-logo" aria-label="The GOMA pipeline" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The GOMA pipeline
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Running the GOMA pipeline
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="deep-purple"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="The GOMA pipeline" class="md-nav__button md-logo" aria-label="The GOMA pipeline" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    The GOMA pipeline
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Running the GOMA pipeline
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Running the GOMA pipeline
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data preparation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data preparation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uploading-data-to-galaxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uploading data to Galaxy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenating-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concatenating data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building lists
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessory-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessory files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running the pipeline
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow_alpha/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GOMA vAlpha 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow_beta/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GOMA vBeta 0.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software used
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data preparation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data preparation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uploading-data-to-galaxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uploading data to Galaxy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenating-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concatenating data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building lists
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessory-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessory files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running the pipeline
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="running-the-goma-pipeline">Running the GOMA pipeline</h1>
+<p>GOMA (Galaxy Open-source <em>Mycobacterium tuberbulosis</em> Analysis) is a pipeline designed to analyse Illumina WGS data of clinical <em>Mtb</em> strains. It is able to determine variants, lineage and sub-lineage, detect drug-resistance, identify transmission clusters and create phylogenies. GOMA is built on the <a href="https://usegalaxy.eu/">EU Galaxy platform</a>, free to use and fully customizable. </p>
+<p>Following is a tutorial on how to run the pipeline succesfully. It starts with the prerequisits, covers data preparation, how to get the accessory files and finishes with how to run the pipeline.</p>
+<h2 id="prerequisits">Prerequisits</h2>
+<p>To use the pipeline the user needs to:</p>
+<ul>
+<li>Have an account on <a href="https://usegalaxy.eu/">galaxy.eu</a> - <a href="https://live.usegalaxy.eu/login/start?redirect=None">Log in or register</a>.</li>
+<li>Have the sequencing data in fastq.gz format either locally- or cloud-stored.</li>
+<li>Know the format of the sequencing data: <ul>
+<li>SE (single-end), PE (paired-end), or SE and PE (both mixed).</li>
+</ul>
+</li>
+</ul>
+<h2 id="data-preparation">Data preparation</h2>
+<p>The GOMA pipeline requires the sequencing data to be in a certain format and structure.</p>
+<h3 id="uploading-data-to-galaxy">Uploading data to Galaxy</h3>
+<ol>
+<li>Create a new history by clicking on the plus symbol.
+    <div style="display: flex; align-items: center;">
+        <img src="assets/Galaxy_History.PNG" alt="Create history in Galaxy" style="float: left; margin-right: 15px; width: 300px;">
+    </div></li>
+<li>Upload the FASTQ files from either local- or cloud-storage via the "Upload" tool on the top left side of the Galaxy GUI.</li>
+</ol>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Upload from local storage</label><label for="__tabbed_1_2">Upload from cloud storage</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div style="display: flex; align-items: center;">
+    <img src="assets/Galaxy_upload_local.png" alt="Galaxy upload local" style="float: left; margin-right: 15px; width: 500px;">
+</div></p>
+</div>
+<div class="tabbed-block">
+<p><div style="display: flex; align-items: center;">
+    <img src="assets/Galaxy_upload_pastefetch.png" alt="Galaxy upload pastefetch" style="float: left; margin-right: 15px; width: 500px;">
+</div>
+Copy the links (URL) from the shared data library or directly paste the content.</p>
+</div>
+</div>
+</div>
+<h3 id="concatenating-data">Concatenating data</h3>
+<p>If the dataset contains samples with multiple FASTQ files per sample for SE data and/or multiple pairs of FASTQ files for PE data, the files must be concatenated to proceed. </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Many SE FASTQ files for one sample</label><label for="__tabbed_2_2">Many PE FASTQ files for one sample</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div style="display: flex; align-items: center;">
+    <img src="assets/Galaxy_history_manySE.PNG" alt="Galaxy history manySE" style="margin-left: 10px; width: 300px;">
+</div></p>
+<p>Example nomenclature: sampleX_SE_1 means sample X single end data run/lane 1.</p>
+</div>
+<div class="tabbed-block">
+<p><div style="display: flex; align-items: center;">
+    <img src="assets/Galaxy_history_manyPE.PNG" alt="Galaxy history manyPE" style="margin-right: 10px; width: 450px;">
+</div></p>
+<p>Example nomenclature: sample_A_1_R1 means sample A run/lane 1 forward reads (R1).</p>
+</div>
+</div>
+</div>
+<p>Concatenating data can be done with the Galaxy tool "Concatenate datasets tail-to-head (cat)". We use this tool to concatenate (combine) all SE FASTQ files of a sample into one file. </p>
+<p>In the case of PE data, we concatenate all forward and all reverse FASTQ files (often marked with "R1" for forward and "R2" for reverse in the file name) into one forward and reverse FASTQ file respectively. </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Concatenate SE FASTQ files</label><label for="__tabbed_3_2">Concatenate PE FASTQ files</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div style="display: flex; align-items: center;">
+    <img src="assets/Galaxy_concatenate_manySE.png" alt="Galaxy concatenate manySE" style="margin-left: 10px; width: 650px;">
+</div></p>
+</div>
+<div class="tabbed-block">
+<p><div style="display: flex; align-items: center;">
+    <img src="assets/Galaxy_concatenate_manyPE.png" alt="Galaxy concatenate manyPE" style="margin-left: 10px; width: 650px;">
+</div></p>
+<p>First we concatenate all forward FASTQ files (R1) into one file, then we concatenate all reverse FASTQ files (R2) into one file.</p>
+</div>
+</div>
+</div>
+<p>We rename the resulting files according to our nomenclature.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Concatenated SE FASTQ file</label><label for="__tabbed_4_2">Concatenated PE FASTQ files</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div style="display: flex; align-items: center;">
+    <img src="assets/Galaxy_history_catSE.png" alt="Galaxy history catSE" style="margin-left: 10px; width: 300px;">
+</div></p>
+<p>"sample_X_SE.fastq.gz" now contains all data from the previous four FASTQ files.</p>
+</div>
+<div class="tabbed-block">
+<p><div style="display: flex; align-items: center;">
+    <img src="assets/Galaxy_history_catPE.png" alt="Galaxy history catPE" style="margin-left: 10px; width: 300x;">
+</div></p>
+<p>"sample_A_R1.fastq.gz" now contains all forward reads from sample A, "sample_A_R2.fastq.gz" now contains all reverse reads from sample A.</p>
+</div>
+</div>
+</div>
+<h3 id="building-lists">Building lists</h3>
+<p>If we have multiple samples, GOMA will process them in one run. To do this, the data needs to be organized in collections. For our SE data we build a list, for our PE data we build a list of dataset pairs. </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Build list of SE datasets</label><label for="__tabbed_5_2">Build list of dataset pairs of PE data</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div style="display: flex; align-items: center;">
+    <img src="assets/Galaxy_SE_list.png" alt="Galaxy SE list" style="margin-left: 10px; width: 500px;">
+</div></p>
+<p>Choose the tick box on the top of your history, choose all SE datasets, click on the "X of Y selected" dropdown menu and choose "Build Dataset List". Name the resulting list "SE".</p>
+</div>
+<div class="tabbed-block">
+<p><div style="display: flex; align-items: center;">
+    <img src="assets/Galaxy_PE_list_of_pairs.png" alt="Galaxy PE list of pairs" style="margin-left: 10px; width: 300x;">
+</div></p>
+<p>Choose the tick box on the top of your history, choose all PE datasets (R1 and R2), click on the "X of Y selected" dropdown menu and choose "Build List of Dataset Pairs". Check if the right R1 and R2 datasets are paired (sample-wise) and name the resulting collection "PE".</p>
+</div>
+</div>
+</div>
+<p>Our data is now ready to be processed by GOMA.</p>
+<h2 id="accessory-files">Accessory files</h2>
+<p>To perform the analysis, the GOMA pipeline needs a few accessory files that are provided on zenodo for the user. The dataset includes the reference genome, files for annotation and a VCF from <em>M.canettii</em> for rooting a phylogeny.</p>
+<div class="admonition note">
+<p class="admonition-title">Links to accessory files from Zenodo</p>
+<p>https://zenodo.org/records/14536411/files/MTB_ancestor_reference_Chromosome.fasta<br>
+https://zenodo.org/records/14536411/files/genes_chromosome.gff3<br>
+https://zenodo.org/records/14536411/files/additional_annotations_chromosome.bed<br>
+https://zenodo.org/records/14536411/files/M.cannetti.vcf<br></p>
+</div>
+<p>Use the paste/fetch data option from the "Upload" tool on Galaxy to import the files from zenodo into your history by copying the links above.</p>
+<h2 id="running-the-pipeline">Running the pipeline</h2>
+<p>To run the pipeline, navigate to the "Workflow" tab in your Galaxy top bar. Search for "GOMA pipeline". Three versions are available: One for only SE data, one for only PE data and one for both SE and PE data. Choose the version that fits your datatype(s).</p>
+<p>The workflow can be imported to enable editing by the user and then being run or it can be run directly. </p>
+<div style="display: flex; align-items: center;">
+    <img src="assets/Running_workflow_interface.png" alt="Running workflow history" style="float: left; margin-right: 15px; width: 800px;">
+</div>
+
+<p>Choose the right files and collections from your history. If it makes sense for your data and you wish to perform phylogenetic analysis and transmission cluster identification (they are linked together), enable the option "identify_transmission_links". The <em>M. cannetti</em> vcf input is optional and needs to be chosen when "identify_transmission_links" is enabled.</p>
+<p>You can now run the workflow and track its progress with the "Workflow Invocations" tab on the left side of your Galaxy GUI.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+        
+          
+          <a href="workflow_alpha/" class="md-footer__link md-footer__link--next" aria-label="Next: GOMA vAlpha 1.0">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                GOMA vAlpha 1.0
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Gian Schüpbach
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/gian-schüpbach-330351310" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.06 2.06 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065m1.782 13.019H3.555V9h3.564zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
