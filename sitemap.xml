@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://sitename.example/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-17</lastmod>
     </url>
     <url>
          <loc>https://sitename.example/reference/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-17</lastmod>
     </url>
     <url>
          <loc>https://sitename.example/workflow_alpha/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-17</lastmod>
     </url>
     <url>
          <loc>https://sitename.example/workflow_beta/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-17</lastmod>
     </url>
 </urlset>

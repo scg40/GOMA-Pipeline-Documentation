@@ -494,6 +494,7 @@
 <h1 id="running-the-goma-pipeline">Running the GOMA pipeline</h1>
 <p>GOMA (Galaxy Open-source <em>Mycobacterium tuberbulosis</em> Analysis) is a pipeline designed to analyse Illumina WGS data of clinical <em>Mtb</em> strains. It is able to determine variants, lineage and sub-lineage, detect drug-resistance, identify transmission clusters and create phylogenies. GOMA is built on the <a href="https://usegalaxy.eu/">EU Galaxy platform</a>, free to use and fully customizable. </p>
 <p>Following is a tutorial on how to run the pipeline succesfully. It starts with the prerequisits, covers data preparation, how to get the accessory files and finishes with how to run the pipeline.</p>
+<p>This is the <a href="https://usegalaxy.eu/published/workflow?id=c38e3ac59d8b86d6">current version on Galaxy</a> (single-end and paired-end data)</p>
 <div class="admonition note">
 <p class="admonition-title">Current Version: GOMA vAlpha 1.0</p>
 <p>Currently, the GOMA pipeline can be used in the version <a href="workflow_alpha/">vAlpha 1.0</a>. This already allows to determine variants, lineage and sub-lineage, detect drug-resistance and identify transmission clusters. The next version <a href="workflow_beta/">vBeta 0.1</a> will inlcude phylogenetic analysis. The scripts to allow this are currently being implemented as a stand alone tool on Galaxy.</p>
@@ -605,7 +606,7 @@ Copy the links (URL) from the shared data library or directly paste the content.
 </div>
 <p>Our data is now ready to be processed by GOMA.</p>
 <h2 id="accessory-files">Accessory files</h2>
-<p>To perform the analysis, the GOMA pipeline needs a few accessory files that are provided on zenodo for the user. The dataset includes the reference genome, files for annotation and a VCF from <em>M.canettii</em> for rooting a phylogeny.</p>
+<p>To perform the analysis, the GOMA pipeline needs a few accessory files that are provided on <a href="https://zenodo.org/records/14536411">zenodo</a> for the user. The dataset includes the reference genome, files for annotation and a VCF from <em>M.canettii</em> for rooting a phylogeny.</p>
 <div class="admonition note">
 <p class="admonition-title">Links to accessory files from Zenodo</p>
 <p>https://zenodo.org/records/14536411/files/MTB_ancestor_reference_Chromosome.fasta<br>
@@ -615,7 +616,7 @@ https://zenodo.org/records/14536411/files/M.cannetti.vcf<br></p>
 </div>
 <p>Use the paste/fetch data option from the "Upload" tool on Galaxy to import the files from zenodo into your history by copying the links above.</p>
 <h2 id="running-the-pipeline">Running the pipeline</h2>
-<p>To run the pipeline, navigate to the "Workflow" tab in your Galaxy top bar. Search for "GOMA pipeline". Three versions are available: One for only SE data, one for only PE data and one for both SE and PE data. Choose the version that fits your datatype(s).</p>
+<p>To run the pipeline, navigate to the "Workflow" tab in your Galaxy top bar. Search for "GOMA pipeline". Three versions are available: One for <a href="https://usegalaxy.eu/published/workflow?id=2b25eaebd3987612">only SE</a> data, one for <a href="https://usegalaxy.eu/published/workflow?id=461d71caea871db8">only PE</a> data and one for <a href="https://usegalaxy.eu/published/workflow?id=c38e3ac59d8b86d6">both SE and PE</a> data. Choose the version that fits your datatype(s).</p>
 <p>The workflow can be imported to enable editing by the user and then being run or it can be run directly. </p>
 <div style="display: flex; align-items: center;">
     <img src="assets/Running_workflow_interface.png" alt="Running workflow history" style="float: left; margin-right: 15px; width: 800px;">
